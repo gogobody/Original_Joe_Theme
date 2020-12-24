@@ -17,8 +17,6 @@
         init() {
             /* 解决移动端 hover 问题*/
             $(document).on('touchstart', e => {});
-            /* 初始化页面加载 */
-            this.init_page_loading();
             /* 初始化页面的hash值跳转 */
             this.init_url_hash();
             /* 初始化标题 */
@@ -164,16 +162,6 @@
                 }
             }
             return url + '\n' + arg + '\n' + arg_val;
-        }
-
-        /* 初始化页面加载 */
-        init_page_loading() {
-            if (window.JOE_CONFIG.DOCUMENT_PAGE_LOADING === 'off') return;
-            $('.fakeLoader').fakeLoader({
-                timeToHide: 1200,
-                bgColor: '#2ecc71',
-                spinner: window.JOE_CONFIG.DOCUMENT_PAGE_LOADING
-            });
         }
 
         /* 初始化页面的hash值跳转 */
@@ -565,57 +553,15 @@
         /* 初始化解析 */
         init_document_analysis() {
             if ($('#j-video').length === 0) return;
-            if (window.JOE_CONFIG.DOCUMENT_ANALYSIS === 'on') {
-                $('#j-dplayer-iframe').attr('src', $('#j-dplayer-iframe').attr('data-src') + $('#j-video .episodes ul li').first().attr('data-url'));
-                $('#j-video .episodes ul li').first().addClass('active');
-                $('#j-video .player-box .title span').html('正在播放：' + $('#j-video .episodes ul li span').first().html());
-                $('#j-video .episodes ul li').on('click', function () {
-                    $('#j-video .episodes ul li').removeClass('active');
-                    $(this).addClass('active');
-                    $('#j-dplayer-iframe').attr('src', $('#j-dplayer-iframe').attr('data-src') + $(this).attr('data-url'));
-                    $('#j-video .player-box .title span').html('正在播放：' + $(this).find('span').html());
-                });
-            } else {
-                let options = {
-                    container: document.getElementById('j-dplayer'),
-                    autoplay: true,
-                    theme: 'var(--theme)',
-                    screenshot: true,
-                    hotkey: true,
-                    preload: 'auto',
-                    video: {
-                        url: $('#j-video .episodes ul li').first().attr('data-url'),
-                        type: 'auto',
-                        pic: '//cdn.jsdelivr.net/npm/typecho_joe_theme@3.2.0/assets/img/player.jpg'
-                    }
-                };
-                if (window.JOE_CONFIG.DPLAYER_DANMAKU_API !== '') {
-                    options['danmaku'] = {
-                        id: $('#j-video .episodes ul li').first().attr('data-url'),
-                        api: window.JOE_CONFIG.DPLAYER_DANMAKU_API
-                    };
-                }
-                const dp = new DPlayer(options);
-                $('#j-video .episodes ul li').first().addClass('active');
-                $('#j-video .player-box .title span').html('正在播放：' + $('#j-video .episodes ul li span').first().html());
-                $('#j-video .episodes ul li').on('click', function () {
-                    $('#j-video .episodes ul li').removeClass('active');
-                    $(this).addClass('active');
-                    $('#j-video .player-box .title span').html('正在播放：' + $(this).find('span').html());
-                    dp.switchVideo(
-                        {
-                            url: $(this).attr('data-url')
-                        },
-                        window.JOE_CONFIG.DPLAYER_DANMAKU_API !== ''
-                            ? {
-                                  id: $(this).attr('data-url'),
-                                  api: window.JOE_CONFIG.DPLAYER_DANMAKU_API
-                              }
-                            : null
-                    );
-                    dp.play();
-                });
-            }
+            $('#j-dplayer').attr('src', $('#j-dplayer').attr('data-src') + $('#j-video .episodes ul li').first().attr('data-url'));
+            $('#j-video .episodes ul li').first().addClass('active');
+            $('#j-video .player-box .title span').html('正在播放：' + $('#j-video .episodes ul li span').first().html());
+            $('#j-video .episodes ul li').on('click', function () {
+                $('#j-video .episodes ul li').removeClass('active');
+                $(this).addClass('active');
+                $('#j-dplayer').attr('src', $('#j-dplayer').attr('data-src') + $(this).attr('data-url'));
+                $('#j-video .player-box .title span').html('正在播放：' + $(this).find('span').html());
+            });
         }
 
         /* 初始化owo标签 */

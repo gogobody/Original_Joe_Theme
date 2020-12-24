@@ -1,4 +1,3 @@
-<div class="fakeLoader"></div>
 <!-- 该处用于密码、输入框等其他异步判断是否正确使用，请勿修改成其他内容！！！ -->
 <div style="display: none;">TypechoJoeTheme</div>
 
@@ -20,11 +19,7 @@
                 <h1 class="logo j-hover-music" title="<?php $this->options->title(); ?>">
                     <?php $this->options->title(); ?>
                     <a href="<?php $this->options->siteUrl(); ?>">
-                        <?php if ($this->options->JLogo) : ?>
-                            <img src="<?php $this->options->JLogo() ?>" />
-                        <?php else : ?>
-                            <img src="https://cdn.jsdelivr.net/npm/typecho_joe_theme@4.3.5/assets/img/logo.png" />
-                        <?php endif; ?>
+                        <img src="<?php echo $this->options->JLogo ? $this->options->JLogo : 'https://cdn.jsdelivr.net/npm/typecho_joe_theme@4.3.5/assets/img/logo.png' ?>" alt="logo">
                     </a>
                 </h1>
                 <!-- 链接 -->
