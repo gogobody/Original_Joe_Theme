@@ -1,14 +1,4 @@
 <?php
-/*
- * @Descripttion: 
- * @Author: 帅气的杜恒欧巴
- * @Date: 2020-12-22 13:06:02
- * @LastEditTime: 2020-12-22 13:06:22
- */
-//tags http://cdn.apc.360.cn/index.php?c=WallPaper&a=getAllCategoriesV2&from=360chrome
-//new http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=getAppsByOrder&order=create_time&start=【0开始】&count=【加载数】&from=360chrome
-//专区 http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=getAppsByCategory&cid=【分类ID】&start=【0开始】&count=【加载数】&from=360chrome
-
 $cid = getParam('cid', '360new');
 
 switch ($cid) {

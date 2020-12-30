@@ -85,6 +85,8 @@
             this.init_floor_click();
             /* 初始化下拉框按钮 */
             this.init_drop_down();
+            /* 初始化手风琴 */
+            this.init_panel_down();
             /* 初始化侧边栏相关 */
             this.init_aside_config();
             /* 初始化登录注册验证 */
@@ -141,6 +143,12 @@
             this.init_video_album();
             /* 初始化壁纸页 */
             this.init_wallpaper();
+            /* 初始化虎牙页 */
+            this.init_huya_type();
+            /* 初始化虎牙跳转 */
+            this.init_huya_skip();
+            /* 初始化虎牙分页 */
+            this.init_huya_pagination()
 
             /* 初始化图片懒加载 */
             this.init_lazy_load();
@@ -269,16 +277,26 @@
         /* 初始化主题色 */
         init_document_theme() {
             if (window.JOE_CONFIG.DOCUMENT_THEME_STATUS === 'on') {
-                if (window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME === '') {
+                if (!window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME) {
                     $('body').css('--theme', localStorage.getItem('--theme') || '#4e7cf2');
                 } else {
                     $('body').css('--theme', localStorage.getItem('--theme') || window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME);
+                }
+                let color = null;
+                if (localStorage.getItem('--theme')) {
+                    color = localStorage.getItem('--theme');
+                } else {
+                    if (!window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME) {
+                        color = '#4e7cf2';
+                    } else {
+                        color = window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME;
+                    }
                 }
                 $('#colorPick').colpick({
                     flat: true,
                     layout: 'hex',
                     submit: false,
-                    color: localStorage.getItem('--theme') || window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME === '' ? '#4e7cf2' : window.JOE_CONFIG.DOCUMENT_GLOBAL_THEME,
+                    color,
                     colorScheme: 'dark',
                     onChange(a, b, c) {
                         $('body').css('--theme', '#' + b);
@@ -640,6 +658,7 @@
                         message: '本篇文章您已经赞过~'
                     });
                 }
+                $(this).find("span").html("loading...")
                 $.ajax({
                     type: 'post',
                     url: $(this).attr('data-url'),
@@ -648,7 +667,7 @@
                     cache: false,
                     success: function (data) {
                         let reg = /\d/;
-                        if (reg.test(data)) $('#j-thumbs-up span').html('赞（' + data.trim() + '）');
+                        if (reg.test(data)) $('#j-thumbs-up span').html('赞 · ' + data.trim());
                         $.toast({
                             type: 'success',
                             message: '感谢您的点赞！'
@@ -962,8 +981,9 @@
         init_drop_down() {
             $('.j-drop').on('click', function (e) {
                 e.stopPropagation();
-                if ($(this).siblings('.j-dropdown').hasClass('active')) $(this).siblings('.j-dropdown').removeClass('active');
-                else {
+                if ($(this).siblings('.j-dropdown').hasClass('active')) {
+                    $(this).siblings('.j-dropdown').removeClass('active');
+                } else {
                     $('.j-dropdown').removeClass('active');
                     $(this).siblings('.j-dropdown').addClass('active');
                 }
@@ -971,6 +991,15 @@
             $(document).on('click', e => $('.j-dropdown').removeClass('active'));
             $('.j-dropdown[stop-propagation]').on('click', function (e) {
                 e.stopPropagation();
+            });
+        }
+
+        /* 初始化手风琴 */
+        init_panel_down() {
+            $('.j-panel').on('click', function () {
+                let next = $(this).next();
+                $(this).next().stop().slideToggle();
+                $('.j-panel-down').not(next).slideUp();
             });
         }
 
@@ -1266,6 +1295,7 @@
                 }
                 if ($(this).attr('data-disabled')) return;
                 $(this).attr('data-disabled', true);
+                $(this).find("button[type='submit']").html('请等待...')
                 $.ajax({
                     url: $(this).attr('action'),
                     type: 'post',
@@ -1283,6 +1313,7 @@
                                 message: str.textContent || ''
                             });
                             $(this).removeAttr('data-disabled');
+                            $(this).find("button[type='submit']").html('发表评论')
                         } else {
                             let url = location.href;
                             url = _this.changeURLArg(url, 'jscroll', 'comments');
@@ -1843,6 +1874,37 @@
                     }
                 }
             });
+        }
+
+        /* 初始化虎牙页 */
+        init_huya_type() {
+            if ($('.huya-list-type').length === 0) return;
+            let _this = this;
+            $('.huya-list-type .list ul li').on('click', function () {
+                window.location.href = _this.changeURLArg(window.location.href, 'vid', $(this).attr('data-vid'));
+            });
+        }
+
+        /* 初始化虎牙跳转 */
+        init_huya_skip() {
+            if ($('.huya-list-go-play').length === 0) return;
+            let _this = this;
+            $('.huya-list-go-play').on('click', function () {
+                let href = _this.changeURLArg(window.location.href, 'play', $(this).attr('data-href'));
+                href = _this.changeURLArg(href, 'title', $(this).attr('data-title'));
+                window.open(href);
+            });
+        }
+
+        /* 初始化虎牙分页 */
+        init_huya_pagination() {
+            if($(".huya-list-pagination").length === 0) return
+            let _this = this;
+            $(".huya-list-pagination li").on("click", function() {
+                let href = window.location.href
+                href = _this.changeURLArg(href, 'pg', $(this).attr('data-pg'));
+                window.location.href = href
+            })
         }
 
         /* 初始化图片懒加载 */

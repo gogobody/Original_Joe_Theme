@@ -26,7 +26,6 @@
                 <nav class="nav j-nav">
                     <a class="link <?php if ($this->is('index')) : ?>active<?php endif; ?>" href="<?php $this->options->siteUrl(); ?>">首页</a>
                     <?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
-
                     <!-- 循环4个之前的 -->
                     <?php $i = 0; ?>
                     <?php while ($pages->next()) : ?>
@@ -41,7 +40,7 @@
                         <div class="link drops">
                             <div class="j-drop">
                                 <span>更多</span>
-                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="toggle-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M825.728 390.144L521.056 702.336 217.152 390.144c-16.576-16.576-43.744-16.576-60.32 0s-16.576 43.744 0 60.32L483.36 778.496c10.56 9.056 23.392 19.616 36.96 17.344 13.568 3.008 27.904-6.784 38.464-17.344L886.08 450.464a42.816 42.816 0 0 0 0-60.32 42.784 42.784 0 0 0-60.352 0z"></path>
                                 </svg>
                             </div>
@@ -56,6 +55,31 @@
                             </nav>
                         </div>
                     <?php endif; ?>
+
+                    <?php if ($this->options->JCustomNavs) : ?>
+                        <div class="link drops">
+                            <div class="j-drop">
+                                <span>其他</span>
+                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M825.728 390.144L521.056 702.336 217.152 390.144c-16.576-16.576-43.744-16.576-60.32 0s-16.576 43.744 0 60.32L483.36 778.496c10.56 9.056 23.392 19.616 36.96 17.344 13.568 3.008 27.904-6.784 38.464-17.344L886.08 450.464a42.816 42.816 0 0 0 0-60.32 42.784 42.784 0 0 0-60.352 0z"></path>
+                                </svg>
+                            </div>
+                            <nav class="j-dropdown">
+                                <?php
+                                $txt = $this->options->JCustomNavs;
+                                $string_arr = explode("\r\n", $txt);
+                                $long = count($string_arr);
+                                for ($i = 0; $i < $long; $i++) {
+                                    $title = explode("||", $string_arr[$i])[0];
+                                    $url = explode("||", $string_arr[$i])[1];
+                                ?>
+                                    <a target="_blank" href="<?php echo $url ?>"><?php echo $title ?></a>
+                                <?php } ?>
+                            </nav>
+                        </div>
+                    <?php endif; ?>
+
+
                 </nav>
 
                 <!-- 搜索 -->
@@ -274,6 +298,30 @@
                     </nav>
                 </section>
 
+                <!-- 其他 -->
+                <?php if ($this->options->JCustomNavs) : ?>
+                    <section class="drop">
+                        <section class="j-drop">
+                            <span>其他</span>
+                            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M825.728 390.144L521.056 702.336 217.152 390.144c-16.576-16.576-43.744-16.576-60.32 0s-16.576 43.744 0 60.32L483.36 778.496c10.56 9.056 23.392 19.616 36.96 17.344 13.568 3.008 27.904-6.784 38.464-17.344L886.08 450.464a42.816 42.816 0 0 0 0-60.32 42.784 42.784 0 0 0-60.352 0z"></path>
+                            </svg>
+                        </section>
+                        <nav class="j-dropdown">
+                            <?php
+                            $txt = $this->options->JCustomNavs;
+                            $string_arr = explode("\r\n", $txt);
+                            $long = count($string_arr);
+                            for ($i = 0; $i < $long; $i++) {
+                                $title = explode("||", $string_arr[$i])[0];
+                                $url = explode("||", $string_arr[$i])[1];
+                            ?>
+                                <a target="_blank" href="<?php echo $url ?>"><?php echo $title ?></a>
+                            <?php } ?>
+                        </nav>
+                    </section>
+                <?php endif; ?>
+
                 <!-- 统计 -->
                 <?php if ($this->options->JCensusStatus === 'on') : ?>
                     <section class="drop drop-census">
@@ -407,7 +455,7 @@
             <div class="card">
                 <div class="title">网站页面</div>
                 <ul>
-                    <li <?php if ($this->is('index')) : ?>active<?php endif; ?>>
+                    <li class="<?php if ($this->is('index')) : ?>active<?php endif; ?>">
                         <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
                         </svg>
@@ -415,13 +463,31 @@
                     </li>
                     <?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
                     <?php while ($pages->next()) : ?>
-                        <li <?php if ($this->is('page', $pages->slug)) : ?>active<?php endif; ?>>
+                        <li class="<?php if ($this->is('page', $pages->slug)) : ?>active<?php endif; ?>">
                             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
                             </svg>
                             <a href="<?php $pages->permalink(); ?>"><?php $pages->title(); ?></a>
                         </li>
                     <?php endwhile; ?>
+                    <!-- 自定义链接 -->
+                    <?php if ($this->options->JCustomNavs) : ?>
+                        <?php
+                        $txt = $this->options->JCustomNavs;
+                        $string_arr = explode("\r\n", $txt);
+                        $long = count($string_arr);
+                        for ($i = 0; $i < $long; $i++) {
+                            $title = explode("||", $string_arr[$i])[0];
+                            $url = explode("||", $string_arr[$i])[1];
+                        ?>
+                            <li>
+                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
+                                </svg>
+                                <a target="_blank" href="<?php echo $url ?>"><?php echo $title ?></a>
+                            </li>
+                        <?php } ?>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -432,12 +498,37 @@
                     <div class="title">类目归类</div>
                     <ul>
                         <?php while ($categorys->next()) : ?>
-                            <li <?php if ($this->is('category', $categorys->slug)) : ?>active<?php endif; ?>>
-                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
-                                </svg>
-                                <a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a>
-                            </li>
+                            <?php if ($categorys->levels === 0) : ?>
+                                <?php $children = $categorys->getAllChildren($categorys->mid); ?>
+                                <?php if (empty($children)) { ?>
+                                    <li class="<?php if ($this->is('category', $categorys->slug)) : ?>active<?php endif; ?>">
+                                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
+                                        </svg>
+                                        <a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li class="drops">
+                                        <div class="j-panel">
+                                            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M325.31499999 764.323l1e-8-508.83099999c0-28.16 22.598-50.934 50.757-50.93400001 13.09300001 0 24.932 5.024 33.901 13.092l335.755 251.633c22.24 16.859 26.905 48.607 10.044 71.024-2.87099999 3.947-6.281 7.355-10.045 10.045l-339.338 254.51c-22.241 16.676-54.16 12.193-70.844-10.225-6.996-9.15-10.225-19.73-10.225-30.31v0z" p-id="6117"></path>
+                                            </svg>
+                                            <a href="javascript: void(0);"><?php $categorys->name(); ?></a>
+                                            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M340.9296875 211.5753125l52.7671875-54.6196875 369.37125 367.5196875-369.37125 367.5196875-52.7671875-54.6196875 311.049375-312.9009375z" p-id="2037" fill="#606266"></path>
+                                            </svg>
+                                        </div>
+                                        <ul class="j-panel-down">
+                                            <?php foreach ($children as $mid) { ?>
+                                                <?php $child = $categorys->getCategory($mid); ?>
+                                                <li>
+                                                    <a <?php if ($this->is('category', $child['slug'])) : ?>class="active" <?php endif; ?> href="<?php echo $child['permalink'] ?>" title="<?php echo $child['name']; ?>"><?php echo $child['name']; ?></a>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                <?php } ?>
+                            <?php endif; ?>
                         <?php endwhile; ?>
                     </ul>
                 </div>
