@@ -517,8 +517,7 @@ function themeConfig($form)
             'background3.min.js' => '效果3',
             'background4.min.js' => '效果4',
             'background5.min.js' => '效果5',
-            'background6.min.js' => '效果6',
-            'background7.min.js' => '效果7',
+            'background6.min.js' => '效果6'
         ),
         'off',
         '是否开启动态背景图（仅限PC）',

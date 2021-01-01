@@ -1,3 +1,164 @@
+/* 在这里修改夜晚模式的配色，这里我只写几个例子，具体样式，你们自己配，黑色的背景颜色修改在public/config.php下的第22行 */
+html[dark="true"] {
+    /* 这里是修改基础的全局公共色彩 */
+    &:root {
+        --background: #333333;
+        --classA: #666;
+        --classB: #444;
+        --main: #999;
+        --classC: #444;
+        --classD: #444;
+        --minor: #999;
+        --box-shadow: none;
+        --routine: #999;
+    }
+    .j-sidebar-xs .content .user img {
+        box-shadow: none;
+    }
+    .j-search-down-xs .content form input {
+        background: #444;
+    }
+    .j-comment .respond form .content .canvas ul li {
+        color: #666;
+    }
+    .j-tabs .nav {
+        background: #444;
+    }
+    .j-comment .respond form .content .canvas ul li.active {
+        color: var(--theme);
+    }
+    .j-index .main .index-title h2 {
+        color: #999;
+        &::after {
+            background: #999;
+        }
+    }
+    .j-aside .aside-user::before {
+        background: none;
+    }
+    .j-index .main .article .article-list .entry-box .meta .item::after{
+        color: #888;
+    }
+    .j-aside .aside h3 .line {
+        background: #999;
+    }
+    .profile-color-logo {
+        display: none;
+    }
+    .profile-color-modes {
+        display: block;
+    }
+    .profile-color-modes-illu-group {
+        animation: profile-color-modes-illu-anim .2s cubic-bezier(.72,.08,1,.68) backwards
+    }
+    .profile-color-modes-illu-frame {
+        animation: profile-color-modes-illu-anim-frame-show 0s forwards,profile-color-modes-illu-anim-frame-hide 0s forwards
+    }
+    .profile-color-modes-illu-frame:first-child {
+        opacity: 1;
+        animation: profile-color-modes-illu-anim-frame-hide 0s forwards
+    }
+    .profile-color-modes-illu-frame:nth-child(8) {
+        animation: profile-color-modes-illu-anim-frame-show 0s forwards
+    }
+    .profile-color-modes-illu-red {
+        animation-delay: .4s;
+        animation-duration: .1s
+    }
+    .profile-color-modes-illu-orange {
+        animation-delay: .5s;
+        animation-duration: .1s
+    }
+    .profile-color-modes-illu-purple {
+        animation-delay: .6s;
+        animation-duration: .1s
+    }
+    .profile-color-modes-illu-blue {
+        animation-delay: .7s;
+        animation-duration: .1s
+    }
+    .profile-color-modes-illu-green {
+        animation-delay: .8s;
+        animation-duration: .2s;
+        animation-timing-function: cubic-bezier(.47,2.92,.84,-1.5)
+    }
+    .profile-color-modes-illu-frame:first-child {
+        animation-delay: 1.8s
+    }
+    .profile-color-modes-illu-frame:nth-child(2) {
+        animation-delay: 1.8s,2.58s
+    }
+    .profile-color-modes-illu-frame:nth-child(3) {
+        animation-delay: 2.58s,2.66s
+    }
+    .profile-color-modes-illu-frame:nth-child(4) {
+        animation-delay: 2.66s,2.78s
+    }
+    .profile-color-modes-illu-frame:nth-child(5) {
+        animation-delay: 2.78s,2.84s
+    }
+    .profile-color-modes-illu-frame:nth-child(6) {
+        animation-delay: 2.84s,3.44s
+    }
+    .profile-color-modes-illu-frame:nth-child(7) {
+        animation-delay: 3.44s,3.56s
+    }
+    .profile-color-modes-illu-frame:nth-child(8) {
+        animation-delay: 3.56s
+    }
+    .profile-color-modes-illu-frame:nth-child(9),
+    .profile-color-modes-illu-frame:nth-child(10) {
+        animation: none
+    }
+}
+.profile-color-logo {
+    display: block;
+}
+.profile-color-modes {
+    display: none;
+}
+.profile-color-modes-illu-frame {
+    opacity: 0
+}
+@keyframes profile-color-modes-illu-anim {
+    0% {
+        stroke:#666;
+    }
+}
+@keyframes profile-color-modes-illu-anim-frame-show {
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-out
+    }
+    to {
+        opacity: 1
+    }
+}
+@keyframes profile-color-modes-illu-anim-frame-hide {
+    0% {
+        opacity: 1;
+        animation-timing-function: ease-in
+    }
+    to {
+        opacity: 0
+    }
+}
+.profile-color-modes-illu-red {
+    stroke: #da3633;
+}
+.profile-color-modes-illu-orange {
+    stroke: #f0883e;
+}
+.profile-color-modes-illu-purple {
+    stroke:  #8957e5;
+}
+.profile-color-modes-illu-green {
+    stroke: #3fb950;
+}
+.profile-color-modes-illu-blue {
+    stroke: #388bfd;
+}
+
 $z-index-1: 111;
 $z-index-2: 222;
 $z-index-3: 333;
@@ -278,7 +439,7 @@ table {
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 12px;
-        color: var(--background);
+        color: #fff;
         line-height: 24px;
         img {
             display: none;
@@ -520,7 +681,7 @@ table {
                     height: 34px;
                     border: none;
                     background: var(--theme);
-                    color: var(--background);
+                    color: #ffffff;
                     font-size: 13px;
                     border-radius: 0 17px 17px 0;
                     padding: 0 10px;
@@ -775,7 +936,7 @@ table {
                                 }
                             }
                             button {
-                                color: var(--background);
+                                color: #fff;
                                 width: 100%;
                                 height: 34px;
                                 border: none;
@@ -812,7 +973,7 @@ table {
                     top: 50%;
                     left: 0;
                     border-radius: 50%;
-                    background-color: var(--background);
+                    background-color: #fff;
                     box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
                     transform: translateY(-50%);
                     transition: left 0.35s;
@@ -1002,7 +1163,7 @@ table {
             height: 38px;
             border: none;
             background: var(--theme);
-            color: var(--background);
+            color: #fff;
             font-size: 13px;
             border-radius: 0 4px 4px 0;
             transition: opacity 0.35s;
@@ -1118,7 +1279,7 @@ table {
                         }
                     }
                     button {
-                        color: var(--background);
+                        color: #fff;
                         width: 100%;
                         height: 34px;
                         border: none;
@@ -1133,7 +1294,7 @@ table {
             }
             &:last-child {
                 span {
-                    color: var(--background);
+                    color: #fff;
                     background: var(--element);
                 }
             }
@@ -1161,7 +1322,7 @@ table {
             top: 50%;
             left: 0;
             border-radius: 50%;
-            background-color: var(--background);
+            background-color: #fff;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
             transform: translateY(-50%);
             transition: left 0.35s;
@@ -1293,15 +1454,19 @@ table {
                 transform: rotateX(0);
             }
         }
-        &.light {
-            transform: scale(1);
-            svg {
-                transition: fill 0.35s;
-                fill: var(--main);
+        &.day-light {
+            .icon-light {
+                display: block;
             }
-            &.current {
-                svg {
-                    fill: var(--theme);
+            .icon-moon {
+                display: none;
+            }
+            &.dark {
+                .icon-light {
+                    display: none;
+                }
+                .icon-moon {
+                    display: block;
                 }
             }
         }
@@ -1509,7 +1674,7 @@ table {
                             top: 5px;
                             right: 5px;
                             background: var(--theme);
-                            color: var(--background);
+                            color: #fff;
                             height: 20px;
                             font-size: 12px;
                             padding: 0 7px;
@@ -1568,7 +1733,7 @@ table {
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        color: var(--background);
+                        color: #fff;
                         font-size: 15px;
                     }
                     .icon {
@@ -1615,7 +1780,7 @@ table {
                         bottom: 0;
                         padding: 10px;
                         background: linear-gradient(to bottom, rgba(6, 6, 6, 0), rgba(6, 6, 6, 0.7));
-                        color: var(--background);
+                        color: #fff;
                         font-size: 14px;
                         line-height: 20px;
                         white-space: nowrap;
@@ -1623,7 +1788,7 @@ table {
                         text-overflow: ellipsis;
                         width: 100%;
                         .type {
-                            color: var(--background);
+                            color: #fff;
                             font-size: 12px;
                             background-image: -webkit-gradient(linear, left top, right top, from(#fc712a), to(#f84c39));
                             background-image: -webkit-linear-gradient(left, #fc712a, #f84c39);
@@ -1709,7 +1874,7 @@ table {
                         height: 20px;
                         line-height: 20px;
                         padding: 0 10px;
-                        color: var(--background);
+                        color: #fff;
                         font-size: 12px;
                         border-radius: 10px;
                         transition: transform 0.35s;
@@ -1721,7 +1886,7 @@ table {
                         position: absolute;
                         top: 5px;
                         left: 5px;
-                        fill: var(--background);
+                        fill: #fff;
                     }
                     div {
                         display: none;
@@ -1757,7 +1922,7 @@ table {
                             height: 20px;
                             line-height: 20px;
                             background-image: -webkit-linear-gradient(0deg, #3ca5f6 0%, #a86af9 100%);
-                            color: var(--background);
+                            color: #fff;
                             font-size: 12px;
                             font-weight: normal;
                             margin-right: 5px;
@@ -2197,7 +2362,7 @@ table {
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            color: var(--background);
+                            color: #fff;
                             line-height: 24px;
                             font-size: 14px;
                         }
@@ -2210,7 +2375,7 @@ table {
                         top: 5px;
                         right: -20px;
                         background: #7f7f8c;
-                        color: var(--background);
+                        color: #fff;
                         width: 65px;
                         text-align: center;
                         font-size: 12px;
@@ -2513,9 +2678,9 @@ table {
             transition: background 0.35s, color 0.35s;
             &:hover {
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 svg {
-                    fill: var(--background);
+                    fill: #fff;
                 }
             }
             svg {
@@ -2535,7 +2700,7 @@ table {
         &.active {
             a {
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
             }
         }
@@ -2714,7 +2879,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -2762,7 +2927,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -2795,7 +2960,7 @@ table {
                     line-height: 30px;
                     &.active {
                         span {
-                            color: var(--background);
+                            color: #fff;
                             background: var(--theme);
                         }
                     }
@@ -2813,7 +2978,7 @@ table {
                         border-radius: 16px;
                         transition: background 0.35s, color 0.35s;
                         &:hover {
-                            color: var(--background);
+                            color: #fff;
                             background: var(--theme);
                         }
                     }
@@ -2841,7 +3006,7 @@ table {
                 align-items: center;
                 flex-wrap: wrap;
                 a {
-                    color: var(--background);
+                    color: #fff;
                     font-size: 12px;
                     background: var(--theme);
                     padding: 3px 8px;
@@ -3340,7 +3505,7 @@ table {
                     cursor: pointer;
                     display: flex;
                     align-items: center;
-                    color: var(--background);
+                    color: #fff;
                     background: var(--theme);
                     border: none;
                     height: 32px;
@@ -3487,7 +3652,7 @@ table {
                             font-size: 16px;
                             font-weight: 500;
                             border-bottom: 1px solid var(--background);
-                            color: var(--background);
+                            color: #fff;
                             transition: all 0.35s;
                             &:hover {
                                 color: var(--theme);
@@ -3500,7 +3665,7 @@ table {
                         align-items: center;
                         justify-content: space-between;
                         .desc {
-                            color: var(--background);
+                            color: #fff;
                             margin-right: 10px;
                         }
                         img {
@@ -3563,7 +3728,7 @@ table {
                 box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.2);
                 user-select: none;
                 font-size: 14px;
-                color: var(--background);
+                color: #fff;
                 // transition: transform 0.25s;
                 .head {
                     pointer-events: none;
@@ -3573,7 +3738,7 @@ table {
                     display: flex;
                     align-items: center;
                     border-bottom: 1px solid var(--classD);
-                    color: var(--background);
+                    color: #fff;
                     img {
                         width: 20px;
                         height: 20px;
@@ -3633,7 +3798,7 @@ table {
                 height: 32px;
                 line-height: 32px;
                 padding: 0 15px;
-                color: var(--background);
+                color: #fff;
                 border-radius: 3px;
                 background: var(--theme);
                 transition: opacity 0.35s;
@@ -3659,7 +3824,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -3741,7 +3906,7 @@ table {
                         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                     }
                     &.active {
-                        color: var(--background);
+                        color: #fff;
                         background: var(--theme);
                         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                     }
@@ -3787,7 +3952,7 @@ table {
                             top: 10px;
                             right: 10px;
                             font-size: 12px;
-                            color: var(--background);
+                            color: #fff;
                             padding: 2px 5px;
                             border-radius: 2px;
                             background: var(--theme);
@@ -3825,7 +3990,7 @@ table {
                         font-style: normal;
                         font-size: 12px;
                         background: var(--theme);
-                        color: var(--background);
+                        color: #fff;
                         padding: 3px 7px;
                         border-radius: 2px;
                     }
@@ -3908,7 +4073,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -3955,7 +4120,7 @@ table {
                         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                     }
                     &.active {
-                        color: var(--background);
+                        color: #fff;
                         background: var(--theme);
                         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                     }
@@ -4027,7 +4192,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -4094,7 +4259,7 @@ table {
                             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                         }
                         &.active {
-                            color: var(--background);
+                            color: #fff;
                             background: var(--theme);
                             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
                         }
@@ -4230,7 +4395,7 @@ table {
                 top: 15px;
                 left: -10px;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 font-weight: 500;
                 box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                 height: 30px;
@@ -4278,7 +4443,7 @@ table {
                 &.active,
                 &:hover {
                     background: var(--theme);
-                    color: var(--background);
+                    color: #fff;
                     font-weight: 500;
                     svg {
                         fill: var(--background);
@@ -4342,13 +4507,13 @@ pre code {
             text-align: center;
             cursor: pointer;
             padding: 0 15px;
-            color: var(--background);
+            color: #fff;
             user-select: none;
             transition: opacity 0.35s;
             svg {
                 width: 15px;
                 height: 15px;
-                fill: var(--background);
+                fill: #fff;
                 margin-right: 5px;
             }
             &:hover {
@@ -4679,7 +4844,7 @@ pre code {
                         padding: 0 15px;
                         border: none;
                         background: var(--theme);
-                        color: var(--background);
+                        color: #fff;
                         font-size: 14px;
                         transition: all 0.35s;
 
@@ -4706,7 +4871,7 @@ pre code {
                 color: var(--main);
 
                 &.active {
-                    color: var(--background);
+                    color: #fff;
                     background: var(--theme);
                 }
 
@@ -4763,7 +4928,7 @@ pre code {
                             i {
                                 display: none;
                                 background: var(--theme);
-                                color: var(--background);
+                                color: #fff;
                                 padding: 0 5px;
                                 border-radius: 2px;
                                 font-style: normal;
@@ -5047,7 +5212,7 @@ pre code {
                     position: absolute;
                     top: 15px;
                     right: 15px;
-                    color: var(--background);
+                    color: #fff;
                     background: var(--theme);
                     border: none;
                     height: 32px;
@@ -5266,7 +5431,7 @@ pre code {
         line-height: 40px;
         height: 40px;
         text-align: center;
-        color: var(--background);
+        color: #fff;
     }
     .content {
         background: var(--background);
@@ -5341,7 +5506,7 @@ pre code {
                 height: 36px;
                 border: none;
                 background: var(--theme);
-                color: var(--background);
+                color: #fff;
                 border-radius: 0 2px 2px 0;
             }
         }
@@ -5371,7 +5536,7 @@ pre code {
                     line-height: 24px;
                     border-radius: 2px;
                     font-size: 12px;
-                    color: var(--background);
+                    color: #fff;
                 }
             }
         }
@@ -5452,7 +5617,7 @@ pre code {
                     top: 15px;
                     left: -10px;
                     background: #6fa3ef;
-                    color: var(--background);
+                    color: #fff;
                     font-weight: 500;
                     box-shadow: 2px 5px 10px rgba(49, 58, 70, 0.15);
                     font-size: 14px;
