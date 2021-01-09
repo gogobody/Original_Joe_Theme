@@ -130,7 +130,6 @@
 			this.init_load_more_video()
 			/* 初始化加载详情 */
 			this.init_video_detail()
-
 			/* 初始化tabs */
 			this.init_j_tabs()
 			/* 初始化collapse */
@@ -154,7 +153,6 @@
 			/* 初始化图片懒加载 */
 			this.init_lazy_load()
 		}
-
 		/* 初始化昼夜 */
 		init_day_light() {
 			$('#j-day-night').on('click', function () {
@@ -600,7 +598,7 @@
 
 		/* 初始化owo标签 */
 		init_owo() {
-			if ($('.OwO').length === 0) return
+			if ($('#OwO_Container').length === 0) return
 			new OwO({
 				logo: 'OωO表情',
 				container: document.getElementsByClassName('OwO')[0],
@@ -1667,23 +1665,19 @@
 			if (window.JOE_CONFIG.DOCUMENT_ASIDE_MOTTO === 'on') {
 				$('.j-aside-motto').show()
 			} else {
-				function getMotto() {
-					$.ajax({
-						url: window.JOE_CONFIG.DOCUMENT_MOTTO_API,
-						method: 'get',
-						dataType: 'text',
-						success: res => {
-							$('.j-aside-motto').html(res)
-							$('.j-aside-motto').show()
-						},
-						error: err => {
-							$('.j-aside-motto').html('人生之路，难免坎坷，但我执着')
-							$('.j-aside-motto').show()
-						}
-					})
-				}
-				getMotto()
-				setInterval(getMotto, 5000)
+				$.ajax({
+					url: window.JOE_CONFIG.DOCUMENT_MOTTO_API,
+					method: 'get',
+					dataType: 'text',
+					success: res => {
+						$('.j-aside-motto').html(res)
+						$('.j-aside-motto').show()
+					},
+					error: err => {
+						$('.j-aside-motto').html('人生之路，难免坎坷，但我执着')
+						$('.j-aside-motto').show()
+					}
+				})
 			}
 		}
 

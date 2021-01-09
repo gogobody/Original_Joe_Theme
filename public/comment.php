@@ -100,7 +100,7 @@ function threadedComments($comments, $options)
                     </div>
                 </div>
                 <div class="foot">
-                    <div class="OwO"></div>
+                    <div class="OwO" id="OwO_Container"></div>
                     <div class="right">
                         <?php $comments->cancelReply("<span data-parent='" . $this->respondId . "'>取消</span>"); ?>
                         <button type="submit">发表评论</button>
